@@ -19,7 +19,7 @@
 </table>
 -------------->
 
-<mat-table [dataSource]="identificationData" class="mat-elevation-z8">
+<mat-table [dataSource]="identificationData">
     <ng-container matColumnDef="userName">
         <mat-header-cell *matHeaderCellDef> Имя узла </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.userName}} </mat-cell>

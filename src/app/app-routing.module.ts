@@ -3,7 +3,8 @@ import {RouterModule, Routes} from '@angular/router';
 import { ListIdentificationDataComponent } from './list-identification-data/list-identification-data.component';
 
 const routes: Routes = [
-  {path: 'identification-data', component: ListIdentificationDataComponent}
+  {path: '',component:ListIdentificationDataComponent},
+  {path: 'identification', component: ListIdentificationDataComponent}
 ];
 
 @NgModule({

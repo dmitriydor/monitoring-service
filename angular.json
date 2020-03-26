@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "monitoring-service"
+  "defaultProject": "monitoring-service",
+  "cli": {
+    "analytics": "d6bfdb82-7627-4a9b-96c8-44fa7b4afac6"
+  }
 }

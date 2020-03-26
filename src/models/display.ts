@@ -1,4 +1,4 @@
-export class DisplayData{
+export class Display{
     userName:string;
     date:string;
     operationSystem:string;

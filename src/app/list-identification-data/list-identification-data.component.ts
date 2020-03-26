@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IdentificationData } from '../../models/identificationData'
+import { Identification } from '../../models/identification'
 import { HttpService } from '../http.service';
-import { DisplayData } from 'src/models/displayData';
+import { Display } from 'src/models/display';
+import { map,tap } from 'rxjs/operators'
+import { pipe } from 'rxjs';
 @Component({
   selector: 'app-list-identification-data',
   templateUrl: './list-identification-data.component.html',
@@ -10,25 +12,22 @@ import { DisplayData } from 'src/models/displayData';
 })
 export class ListIdentificationDataComponent implements OnInit {
   
-  identificationData: Set<DisplayData> = new Set<DisplayData>();
+  identificationData: Display[] = [];
   displayedColumns: string[] = ['userName','date','appVersion','operationSystem'];
   
   constructor(private httpService: HttpService) {}
 
   ngOnInit(): void {
-    this.httpService.getData().subscribe((data:IdentificationData[]) => {
-      for(let item of data){
-        this.identificationData.add({
-          userName: item.userName,
-          date: new Date().toLocaleString(),
-          operationSystem: item.operationSystem,
-          appVersion: item.appVersion
-        });
-      }
+    this.httpService.getData()
+    .subscribe((data:Identification[]) => {
+      this.identificationData = data.map(item => {
+        return {
+          date:new Date(item.date).toLocaleString(), 
+          userName:item.userName, 
+          appVersion:item.appVersion, 
+          operationSystem:item.operationSystem
+        }
+      });
     });
   }
-  /*ngOnInit(): void {
-    this.httpService.getData().subscribe((data:IdentificationData[]) => this.identificationData = data);
-  }*/
-
 }
