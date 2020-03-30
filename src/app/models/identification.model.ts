@@ -1,4 +1,5 @@
-export class Display{
+export interface Identification {
+    id:string;
     userName:string;
     date:string;
     operationSystem:string;

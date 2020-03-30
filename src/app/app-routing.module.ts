@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import { ListIdentificationDataComponent } from './list-identification-data/list-identification-data.component';
+import { IdentificationListComponent } from './identification-list/identification-list.component';
 
 const routes: Routes = [
-  {path: '',component:ListIdentificationDataComponent},
-  {path: 'identification', component: ListIdentificationDataComponent}
+  {path: '', pathMatch:'full', redirectTo:'identification'},
+  {path: 'identification', component: IdentificationListComponent}
 ];
 
 @NgModule({

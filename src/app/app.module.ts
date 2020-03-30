@@ -2,14 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { ListIdentificationDataComponent } from './list-identification-data/list-identification-data.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { IdentificationListComponent } from './identification-list/identification-list.component';
+import { IdentificationService } from './services/identification.service';
 @NgModule({
   declarations: [
     AppComponent,
-    ListIdentificationDataComponent
+    IdentificationListComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +19,7 @@ import { MatTableModule } from '@angular/material/table';
     BrowserAnimationsModule,
     MatTableModule
   ],
-  providers: [],
+  providers: [IdentificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
