@@ -10,14 +10,14 @@ export class IdentificationService {
   constructor(private http: HttpClient) { }
   
   loadAll(): Observable<IdentificationViewModel[]> {
-    return this.http.get<Identification[]>('../assets/identificationData.json')
+    return this.http.get<Identification[]>('https://localhost:5001/api/identification')
     .pipe(map((data: IdentificationViewModel[]) => data.map(item => {
       return {
         date: new Date(item.date).toLocaleString(),
         userName: item.userName,
         appVersion: item.appVersion,
         operationSystem: item.operationSystem
-       };
+      };
       })));
   }
 }
