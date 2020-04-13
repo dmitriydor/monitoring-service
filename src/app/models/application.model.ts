@@ -1,4 +1,6 @@
-export interface IdentificationViewModel {
+
+export interface Application {
+    id: string;
     userName: string;
     date: string;
     operationSystem: string;

@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { IdentificationService } from './services/identification.service';
-import { IdentificationViewModel } from './models/identification-view-model.model';
+import { ApplicationService } from './services/application.service';
+import {Application} from "./models/application.model";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  
-  title = 'monitoring-service';
-  identificationList:IdentificationViewModel[] = [];
+  applicationList:Application[] = [];
 
-  constructor(private identificationService: IdentificationService){
+  constructor(private identificationService: ApplicationService){
     this.identificationService.loadAll()
-    .subscribe(data => this.identificationList = data);
+    .subscribe(data => this.applicationList = data);
   }
 }

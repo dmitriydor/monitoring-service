@@ -1,0 +1,23 @@
+<div *ngIf="application">
+  <h3>{{application.userName}}</h3>
+  <p>Идентификатор:<span>{{application.id}}</span></p>
+  <p>Версия ПО ViPNet Client:<span>{{application.appVersion}}</span></p>
+  <h4><b>События ViPNet Client</b></h4>
+</div>
+
+<table mat-table *ngIf="application" [dataSource]="application.events">
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let event"> {{event.date}} </td>
+  </ng-container>
+  <ng-container matColumnDef="eventName">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let event"> {{event.eventName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let event"> {{event.description}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
