@@ -1,23 +1,33 @@
-<div *ngIf="application">
+<div class="application-data" *ngIf="application">
   <h3>{{application.userName}}</h3>
-  <p>Идентификатор:<span>{{application.id}}</span></p>
-  <p>Версия ПО ViPNet Client:<span>{{application.appVersion}}</span></p>
-  <h4><b>События ViPNet Client</b></h4>
+  <table>
+    <tbody>
+      <tr>
+        <td>Идентификатор:</td>
+        <td>{{application.id}}</td>
+      </tr>
+      <tr>
+        <td>Версия ПО ViPNet Client:</td>
+        <td>{{application.appVersion}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <h4>События ViPNet Client</h4>
 </div>
 
-<table mat-table *ngIf="application" [dataSource]="application.events">
+<mat-table *ngIf="application" [dataSource]="application.events" class="mat-elevation-z8">
   <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Date </th>
-    <td mat-cell *matCellDef="let event"> {{event.date}} </td>
+    <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+    <mat-cell *matCellDef="let event"> {{event.date}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="eventName">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let event"> {{event.eventName}} </td>
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell *matCellDef="let event"> {{event.eventName}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef> Description </th>
-    <td mat-cell *matCellDef="let event"> {{event.description}} </td>
+    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+    <mat-cell *matCellDef="let event"> {{event.description}} </mat-cell>
   </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
