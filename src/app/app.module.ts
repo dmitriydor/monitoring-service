@@ -5,12 +5,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
-import { IdentificationListComponent } from './identification-list/identification-list.component';
-import { IdentificationService } from './services/identification.service';
+import { ApplicationService } from './services/application.service';
+import { ApplicationListComponent } from './application-list/application-list.component';
+import { ApplicationDetailsComponent } from './application-details/application-details.component';
 @NgModule({
   declarations: [
     AppComponent,
-    IdentificationListComponent
+    ApplicationListComponent,
+    ApplicationDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +21,7 @@ import { IdentificationService } from './services/identification.service';
     BrowserAnimationsModule,
     MatTableModule
   ],
-  providers: [IdentificationService],
+  providers: [ApplicationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
