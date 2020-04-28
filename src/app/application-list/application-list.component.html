@@ -1,3 +1,7 @@
+<section id="auto-update">
+  <mat-checkbox [(ngModel)]="autoUpdate">Автообновление списка приложений</mat-checkbox>
+</section>
+
 <mat-table [dataSource]="tableSource" class="mat-elevation-z8">
   <ng-container matColumnDef="userName">
     <mat-header-cell *matHeaderCellDef> Имя узла </mat-header-cell>

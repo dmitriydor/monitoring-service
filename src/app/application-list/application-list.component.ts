@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ApplicationViewModel} from "../models/application-view-model.model";
-import {Router} from "@angular/router";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ApplicationViewModel} from '../models/application-view-model.model';
 
 @Component({
   selector: 'app-application-list',
@@ -10,13 +9,15 @@ import {Router} from "@angular/router";
 export class ApplicationListComponent {
 
   @Input() tableSource: ApplicationViewModel[];
+  @Output() onSelected = new EventEmitter<ApplicationViewModel>();
   selectedApp: ApplicationViewModel;
-  displayedColumns: string[] = ['userName','date','appVersion','operationSystem'];
-  constructor(private router:Router) {}
+  displayedColumns: string[] = ['userName', 'date', 'appVersion', 'operationSystem'];
+  autoUpdate = false;
+  constructor() {}
 
-  select(application: ApplicationViewModel){
+  select(application: ApplicationViewModel) {
     this.selectedApp = application;
-    this.router.navigate(['/identification', application.id]);
+    this.onSelected.emit(application);
   }
 
 }

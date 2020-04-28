@@ -1,2 +1,2 @@
-<app-application-list [tableSource]='applicationList'></app-application-list>
+<app-application-list [tableSource]='applicationList | async' (onSelected)="onSelected($event)"></app-application-list>
 
