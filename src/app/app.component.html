@@ -1,2 +1,6 @@
-<app-application-list [tableSource]='applicationList | async' (onSelected)="onSelected($event)"></app-application-list>
+<mat-checkbox id="auto-update" (change)="check($event)">Автообновление списка приложений</mat-checkbox>
+<app-application-list
+  [tableSource]='applicationData$ | async'
+  (onSelected)="onSelected($event)">
+</app-application-list>
 

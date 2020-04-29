@@ -7,17 +7,14 @@ import {ApplicationViewModel} from '../models/application-view-model.model';
   styleUrls: ['./application-list.component.less']
 })
 export class ApplicationListComponent {
-
-  @Input() tableSource: ApplicationViewModel[];
   @Output() onSelected = new EventEmitter<ApplicationViewModel>();
+  @Input() tableSource: ApplicationViewModel[];
   selectedApp: ApplicationViewModel;
   displayedColumns: string[] = ['userName', 'date', 'appVersion', 'operationSystem'];
-  autoUpdate = false;
   constructor() {}
 
   select(application: ApplicationViewModel) {
     this.selectedApp = application;
     this.onSelected.emit(application);
   }
-
 }
