@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Application } from 'src/app/models/application.model';
 import { Observable } from 'rxjs';
-import {map} from 'rxjs/operators'
+import {map} from 'rxjs/operators';
 import { ApplicationViewModel } from 'src/app/models/application-view-model.model';
 @Injectable()
 export class ApplicationService {
@@ -21,7 +21,7 @@ export class ApplicationService {
         };
       })));
   }
-  loadById(appId:string):Observable<ApplicationViewModel>{
+  loadById(appId: string): Observable<ApplicationViewModel> {
     return this.http.get<ApplicationViewModel>(`https://localhost:5001/api/application/${appId}`);
   }
 }
