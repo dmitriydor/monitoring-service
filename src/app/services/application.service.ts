@@ -4,13 +4,14 @@ import { Application } from 'src/app/models/application.model';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
 import { ApplicationViewModel } from 'src/app/models/application-view-model.model';
+import { environment } from '../../environments/environment'
 @Injectable()
 export class ApplicationService {
-
+  private appPath = environment.baseUrl + 'application';
   constructor(private http: HttpClient) { }
 
   loadAll(): Observable<Application[]> {
-    return this.http.get<Application[]>('https://localhost:5001/api/application')
+    return this.http.get<Application[]>(this.appPath)
       .pipe(map((data: ApplicationViewModel[]) => data.map(item => {
         return {
           id: item.id,
@@ -22,6 +23,6 @@ export class ApplicationService {
       })));
   }
   loadById(appId: string): Observable<ApplicationViewModel> {
-    return this.http.get<ApplicationViewModel>(`https://localhost:5001/api/application/${appId}`);
+    return this.http.get<ApplicationViewModel>(this.appPath + `/${appId}`);
   }
 }

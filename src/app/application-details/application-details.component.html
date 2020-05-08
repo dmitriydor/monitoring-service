@@ -1,7 +1,7 @@
 <div class="application-data" *ngIf="application">
   <div class="application-data__header">
     <h3>{{application.userName}}</h3>
-    <button mat-button color="primary" class="delete-logs" *ngIf="application.events.length!==0" (click)="delete(application.id) ">
+    <button mat-button color="primary" class="delete-logs" *ngIf="application.events.length!==0" (click)="deleteApplicationEvents(application.id) ">
       <mat-icon>delete_outline</mat-icon>
       Удалить все события
     </button>

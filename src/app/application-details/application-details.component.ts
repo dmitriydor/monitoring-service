@@ -29,8 +29,8 @@ export class ApplicationDetailsComponent implements OnDestroy {
         takeUntil(this.destroy$))
       .subscribe(app => this.application = app);
   }
-  delete(id: string) {
-    this.eventService.deleteAllEventsById(id).pipe(takeUntil(this.destroy$)).subscribe( );
+  deleteApplicationEvents(id: string) {
+    this.eventService.deleteAllEventsByApplicationId(id).pipe(takeUntil(this.destroy$)).subscribe( );
     this.loadDetails();
   }
   ngOnDestroy(): void {
