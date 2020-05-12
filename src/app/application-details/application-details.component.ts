@@ -2,9 +2,9 @@ import { Component, OnDestroy } from '@angular/core';
 import { ApplicationService } from '../services/application.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApplicationViewModel } from '../models/application-view-model.model';
-import {distinctUntilChanged, flatMap, takeUntil} from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import {EventService} from '../services/event.service';
+import {distinctUntilChanged, flatMap, map, takeUntil, tap} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import { EventService } from '../services/event.service';
 
 @Component({
   selector: 'app-application-details',
@@ -14,24 +14,28 @@ import {EventService} from '../services/event.service';
 export class ApplicationDetailsComponent implements OnDestroy {
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
+  refresh$: Subject<string> = new Subject<string>();
   application: ApplicationViewModel;
   displayedColumns: string[] = ['date', 'eventName', 'description'];
 
-  constructor(private applicationService: ApplicationService, private route: ActivatedRoute, private eventService: EventService) {
-    this.loadDetails();
-  }
-  loadDetails() {
-    this.route.params
+  constructor(private applicationService: ApplicationService,
+              private route: ActivatedRoute,
+              private eventService: EventService) {
+    this.refresh$
       .pipe(
+        takeUntil(this.destroy$),
+        flatMap(id => this.applicationService.loadById(id)))
+      .subscribe((app: ApplicationViewModel) => this.application = app);
+    this.route.params.pipe(
         distinctUntilChanged(),
-        flatMap(params => this.applicationService.loadById(params.id)
-          .pipe(takeUntil(this.destroy$))),
+        map(params => params.id),
         takeUntil(this.destroy$))
-      .subscribe(app => this.application = app);
+      .subscribe(this.refresh$);
   }
-  delete(id: string) {
-    this.eventService.deleteAllEventsById(id).pipe(takeUntil(this.destroy$)).subscribe( );
-    this.loadDetails();
+  deleteApplicationEvents(id: string) {
+    this.eventService.deleteAllEventsByApplicationId(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe( () => this.refresh$.next(id));
   }
   ngOnDestroy(): void {
     this.destroy$.next(true);
