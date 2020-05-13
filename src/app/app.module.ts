@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { ApplicationService } from './services/application.service';
 import { ApplicationListComponent } from './application-list/application-list.component';
 import { ApplicationDetailsComponent } from './application-details/application-details.component';
@@ -23,6 +25,8 @@ import {FormsModule} from '@angular/forms';
         BrowserAnimationsModule,
         MatTableModule,
         MatCheckboxModule,
+        MatButtonModule,
+        MatIconModule,
         FormsModule
     ],
   providers: [ApplicationService],

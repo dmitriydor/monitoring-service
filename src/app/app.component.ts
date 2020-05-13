@@ -26,9 +26,6 @@ export class AppComponent implements OnDestroy {
         ),
       takeUntil(this.destroy$)
     );
-
-
-
   constructor(private identificationService: ApplicationService, private router: Router) {
     this.refresh$
       .pipe(
@@ -42,7 +39,6 @@ export class AppComponent implements OnDestroy {
       )
       .subscribe(this.refresh$);
   }
-
   onSelected(application: ApplicationViewModel) {
     this.router.navigate(['/application', application.id]);
   }
