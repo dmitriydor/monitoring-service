@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { ApplicationEventDescriptionModel } from '../models/application-event-description.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,5 +13,16 @@ export class EventService {
   constructor(private http: HttpClient) { }
   deleteAllEventsByApplicationId(appId: string): Observable<void> {
     return  this.http.delete<void>(`${this.appPath}/${appId}`);
+  }
+  loadEventDescriptions(): Observable<ApplicationEventDescriptionModel[]> {
+    return this.http.get('../../assets/event-descriptions.json')
+      .pipe(map((data: ApplicationEventDescriptionModel[]) => data.map(item => {
+        return {
+        eventName: item.eventName,
+        description: item.description };
+        })));
+  }
+  saveEventDescriptions(events: ApplicationEventDescriptionModel[]) {
+    return this.http.post('http://httpbin.org/post', events);
   }
 }

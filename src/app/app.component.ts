@@ -26,11 +26,11 @@ export class AppComponent implements OnDestroy {
         ),
       takeUntil(this.destroy$)
     );
-  constructor(private identificationService: ApplicationService, private router: Router) {
+  constructor(private applicationService: ApplicationService, private router: Router) {
     this.refresh$
       .pipe(
         takeUntil(this.destroy$),
-        flatMap( () => identificationService.loadAll()))
+        flatMap( () => applicationService.loadAll()))
       .subscribe(this.applicationData$);
     combineLatest([this.interval$, this.checkbox$])
       .pipe(
