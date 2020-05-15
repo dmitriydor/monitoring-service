@@ -10,12 +10,13 @@ import { map } from 'rxjs/operators';
 })
 export class EventService {
   private appPath = `${environment.baseUrl}application`;
+  private eventsPath = `${environment.baseUrl}events`
   constructor(private http: HttpClient) { }
   deleteAllEventsByApplicationId(appId: string): Observable<void> {
     return  this.http.delete<void>(`${this.appPath}/${appId}`);
   }
   loadEventDescriptions(): Observable<ApplicationEventDescriptionModel[]> {
-    return this.http.get('../../assets/event-descriptions.json')
+    return this.http.get(`${this.eventsPath}/descriptions`)
       .pipe(map((data: ApplicationEventDescriptionModel[]) => data.map(item => {
         return {
         eventName: item.eventName,
@@ -23,6 +24,6 @@ export class EventService {
         })));
   }
   saveEventDescriptions(events: ApplicationEventDescriptionModel[]) {
-    return this.http.post('http://httpbin.org/post', events);
+    return this.http.post(`${this.eventsPath}/descriptions`, events);
   }
 }

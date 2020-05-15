@@ -16,9 +16,9 @@
       </ng-container>
       <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef> Описание </mat-header-cell>
-        <mat-cell *matCellDef="let applicationEvent" (click)="editField(applicationEvent.eventName)">
-          <span *ngIf="eventName !== applicationEvent.eventName">{{applicationEvent.description}}</span>
-          <mat-form-field *ngIf="eventName === applicationEvent.eventName" style="width: 100%">
+        <mat-cell *matCellDef="let applicationEvent" (click)="setSelectedEventName(applicationEvent.eventName)">
+          <span *ngIf="selectedEventName !== applicationEvent.eventName">{{applicationEvent.description}}</span>
+          <mat-form-field *ngIf="selectedEventName === applicationEvent.eventName" style="width: 100%">
             <input [(ngModel)]="applicationEvent.description" value="{{applicationEvent.description}}" matInput type="text" (change)="addEditedEvent(applicationEvent)">
             <button mat-button matSuffix mat-icon-button aria-label="Clear" class="focus-none" (click)="applicationEvent.description = null">
               <mat-icon>close</mat-icon>
