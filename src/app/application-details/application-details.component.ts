@@ -40,11 +40,11 @@ export class ApplicationDetailsComponent implements OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe( () => this.refresh$.next(id));
   }
-  openEditEventDescriptionsDialog() {
+  openEditEventDescriptionsDialog(id: string) {
     this.eventDescriptionDialog.open(EditEventDescriptionDialogComponent, {
       width: '80%',
       height: '80%'
-    });
+    }).afterClosed().pipe(takeUntil(this.destroy$)).subscribe(() => this.refresh$.next(id));
   }
   ngOnDestroy(): void {
     this.destroy$.next(true);
