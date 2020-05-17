@@ -13,7 +13,7 @@ export class EventService {
   private eventsPath = `${environment.baseUrl}events`
   constructor(private http: HttpClient) { }
   deleteAllEventsByApplicationId(appId: string): Observable<void> {
-    return  this.http.delete<void>(`${this.appPath}/${appId}`);
+    return  this.http.delete<void>(`${this.appPath}/${appId}/events`);
   }
   loadEventDescriptions(): Observable<ApplicationEventDescriptionModel[]> {
     return this.http.get(`${this.eventsPath}/descriptions`)
