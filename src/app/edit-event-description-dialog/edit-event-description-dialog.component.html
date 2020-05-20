@@ -1,0 +1,33 @@
+<section class="edit-events-section">
+    <header class="edit-events-section__header">
+      <button mat-icon-button class="focus-none" color="primary" (click)="closeDialog()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <h2 mat-dialog-title class="">Редактирование </h2>
+      <button mat-icon-button color="primary" class="focus-none" (click)="saveEventDescriptions()">
+        <mat-icon>save</mat-icon>
+      </button>
+    </header>
+  <mat-dialog-content>
+    <mat-table [dataSource]="eventDescriptions" class="mat-elevation-z8">
+      <ng-container  matColumnDef="eventName">
+        <mat-header-cell *matHeaderCellDef> Событие </mat-header-cell>
+        <mat-cell *matCellDef="let applicationEvent"> {{applicationEvent.eventName}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> Описание </mat-header-cell>
+        <mat-cell *matCellDef="let applicationEvent" (click)="setSelectedEventName(applicationEvent.eventName)">
+          <span *ngIf="selectedEventName !== applicationEvent.eventName">{{applicationEvent.description}}</span>
+          <mat-form-field *ngIf="selectedEventName === applicationEvent.eventName" style="width: 100%">
+            <input [(ngModel)]="applicationEvent.description" value="{{applicationEvent.description}}" matInput type="text" (change)="addEditedEvent(applicationEvent)">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" class="focus-none" (click)="applicationEvent.description = null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="['eventName', 'description']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['eventName', 'description'];"></mat-row>
+    </mat-table>
+  </mat-dialog-content>
+</section>

@@ -3,8 +3,10 @@ import { ApplicationService } from '../services/application.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApplicationViewModel } from '../models/application-view-model.model';
 import {distinctUntilChanged, flatMap, map, takeUntil, tap} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import { EventService } from '../services/event.service';
+import { MatDialog } from '@angular/material/dialog';
+import { EditEventDescriptionDialogComponent } from '../edit-event-description-dialog/edit-event-description-dialog.component';
 
 @Component({
   selector: 'app-application-details',
@@ -20,7 +22,8 @@ export class ApplicationDetailsComponent implements OnDestroy {
 
   constructor(private applicationService: ApplicationService,
               private route: ActivatedRoute,
-              private eventService: EventService) {
+              private eventService: EventService,
+              public eventDescriptionDialog: MatDialog ) {
     this.refresh$
       .pipe(
         takeUntil(this.destroy$),
@@ -36,6 +39,12 @@ export class ApplicationDetailsComponent implements OnDestroy {
     this.eventService.deleteAllEventsByApplicationId(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe( () => this.refresh$.next(id));
+  }
+  openEditEventDescriptionsDialog(id: string) {
+    this.eventDescriptionDialog.open(EditEventDescriptionDialogComponent, {
+      width: '80%',
+      height: '80%'
+    }).afterClosed().pipe(takeUntil(this.destroy$)).subscribe(() => this.refresh$.next(id));
   }
   ngOnDestroy(): void {
     this.destroy$.next(true);
